@@ -221,14 +221,14 @@ export class QuoteGeneratorService {
         return `
             <table class="items-table detailed-list-table">
                 <colgroup>
-                    <col style="width: 4.25%;">
+                    <col style="width: 5%;">
+                    <col style="width: 20%;">
                     <col style="width: auto;">
-                    <col style="width: auto;">
-                    <col style="width: auto;">
-                    <col style="width: 4.5125%;">
-                    <col style="width: 4.5125%;">
-                    <col style="width: 4.5125%;">
-                    <col style="width: 6.3%;">
+                    <col style="width: 15%;">
+                    <col style="width: 7%;">
+                    <col style="width: 7%;">
+                    <col style="width: 7%;">
+                    <col style="width: 8%;">
                 </colgroup>
                 <thead>
                     <tr class="table-title">

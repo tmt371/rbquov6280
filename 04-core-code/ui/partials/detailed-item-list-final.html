@@ -228,6 +228,10 @@
                 border-bottom: 1px solid var(--border-light-grey);
                 text-align: right;
             }
+            /* [NEW] This is the key fix for the mobile card view. It hides empty table cells. */
+            .detailed-list-table td:empty {
+                display: none;
+            }
             .detailed-list-table tr td:last-child {
                 border-bottom: none;
             }
@@ -246,6 +250,12 @@
             }
             .detailed-list-table td:first-of-type::before {
                 color: #333;
+            }
+
+            /* [MODIFIED] Remove the card-style transformation for the accessories table */
+            .motorised-accessories-table {
+                table-layout: auto;
+                border: 1px solid var(--border-dark-grey);
             }
         }
     </style>
@@ -270,9 +280,9 @@
                 <div class="table-scroll-wrapper">
                     <table class="motorised-accessories-table">
                         <colgroup>
-                            <col style="width: 56%;">
                             <col style="width: auto;">
-                            <col style="width: 24%;">
+                            <col style="width: auto;">
+                            <col style="width: auto;">
                         </colgroup>
                         <thead>
                             <tr class="table-title">
