@@ -23,7 +23,7 @@
         }
 
         .page-container {
-            max-width: 1200px;
+            max-width: 900px; /* [MODIFIED] Set max-width to match the main quote page */
             margin: auto;
             padding: 20px;
         }
@@ -71,7 +71,7 @@
             border-collapse: collapse;
             margin-top: 20px;
             border: 2px solid var(--border-dark-grey);
-            table-layout: fixed; /* [MODIFIED] Set table-layout to fixed */
+            table-layout: fixed; /* Use fixed layout for predictable column widths */
         }
 
         th,
@@ -175,22 +175,6 @@
             min-width: 0;
         }
         
-        /* [NEW] Detailed List Table Column Widths */
-        .detailed-list-table th:nth-child(1) { width: 4.25%; } /* # */
-        .detailed-list-table th:nth-child(2) { width: 16%; } /* F-NAME */
-        .detailed-list-table th:nth-child(3) { width: auto; } /* F-COLOR */
-        .detailed-list-table th:nth-child(4) { width: auto; } /* Location */
-        .detailed-list-table th:nth-child(5) { width: 4.75%; } /* HD */
-        .detailed-list-table th:nth-child(6) { width: 4.75%; } /* Dual */
-        .detailed-list-table th:nth-child(7) { width: 4.75%; } /* Motor */
-        .detailed-list-table th:nth-child(8) { width: 6.3%; } /* Price */
-
-        /* [NEW] Motorised Accessories Table Column Widths */
-        .motorised-accessories-table th:nth-child(1) { width: 56%; } /* Item */
-        .motorised-accessories-table th:nth-child(2) { width: auto; } /* QTY */
-        .motorised-accessories-table th:nth-child(3) { width: 24%; } /* Total Price */
-
-
         @media (max-width: 850px) {
             .appendix-flex-container {
                 flex-direction: column;
@@ -285,6 +269,11 @@
             <div class="appendix-flex-container">
                 <div class="table-scroll-wrapper">
                     <table class="motorised-accessories-table">
+                        <colgroup>
+                            <col style="width: 56%;">
+                            <col style="width: auto;">
+                            <col style="width: 24%;">
+                        </colgroup>
                         <thead>
                             <tr class="table-title">
                                 <th colspan="3">Motorised Accessories Summary</th>

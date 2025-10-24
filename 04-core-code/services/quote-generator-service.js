@@ -202,7 +202,6 @@ export class QuoteGeneratorService {
                     fabricClass = 'bg-blockout';
                 }
     
-                // [MODIFIED] Always generate all cells to maintain table structure, leaving them empty if the property doesn't exist.
                 const finalPrice = (item.linePrice || 0) * mulTimes;
                 const cells = `
                     <td data-label="#" class="text-center">${index + 1}</td>
@@ -221,6 +220,16 @@ export class QuoteGeneratorService {
     
         return `
             <table class="items-table detailed-list-table">
+                <colgroup>
+                    <col style="width: 4.25%;">
+                    <col style="width: auto;">
+                    <col style="width: auto;">
+                    <col style="width: auto;">
+                    <col style="width: 4.5125%;">
+                    <col style="width: 4.5125%;">
+                    <col style="width: 4.5125%;">
+                    <col style="width: 6.3%;">
+                </colgroup>
                 <thead>
                     <tr class="table-title">
                         <th colspan="${headers.length}">Roller Blinds - Detailed List</th>
