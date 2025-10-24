@@ -71,6 +71,7 @@
             border-collapse: collapse;
             margin-top: 20px;
             border: 2px solid var(--border-dark-grey);
+            table-layout: fixed; /* [MODIFIED] Set table-layout to fixed */
         }
 
         th,
@@ -174,6 +175,22 @@
             min-width: 0;
         }
         
+        /* [NEW] Detailed List Table Column Widths */
+        .detailed-list-table th:nth-child(1) { width: 4.25%; } /* # */
+        .detailed-list-table th:nth-child(2) { width: 16%; } /* F-NAME */
+        .detailed-list-table th:nth-child(3) { width: auto; } /* F-COLOR */
+        .detailed-list-table th:nth-child(4) { width: auto; } /* Location */
+        .detailed-list-table th:nth-child(5) { width: 4.75%; } /* HD */
+        .detailed-list-table th:nth-child(6) { width: 4.75%; } /* Dual */
+        .detailed-list-table th:nth-child(7) { width: 4.75%; } /* Motor */
+        .detailed-list-table th:nth-child(8) { width: 6.3%; } /* Price */
+
+        /* [NEW] Motorised Accessories Table Column Widths */
+        .motorised-accessories-table th:nth-child(1) { width: 56%; } /* Item */
+        .motorised-accessories-table th:nth-child(2) { width: auto; } /* QTY */
+        .motorised-accessories-table th:nth-child(3) { width: 24%; } /* Total Price */
+
+
         @media (max-width: 850px) {
             .appendix-flex-container {
                 flex-direction: column;
@@ -195,7 +212,6 @@
                 gap: 5px;
             }
 
-            /* [MODIFIED] Re-styled mobile table to keep thead and use card-like rows */
             .table-scroll-wrapper {
                 overflow-x: hidden;
             }
@@ -281,29 +297,29 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Motor</td>
-                                <td class="text-center">{{motorQty}}</td>
-                                <td class="text-right">{{motorPrice}}</td>
+                                <td data-label="Item">Motor</td>
+                                <td data-label="QTY" class="text-center">{{motorQty}}</td>
+                                <td data-label="Total Price" class="text-right">{{motorPrice}}</td>
                             </tr>
                             <tr>
-                                <td>Remote (1CH)</td>
-                                <td class="text-center">{{remote1chQty}}</td>
-                                <td class="text-right">{{remote1chPrice}}</td>
+                                <td data-label="Item">Remote (1CH)</td>
+                                <td data-label="QTY" class="text-center">{{remote1chQty}}</td>
+                                <td data-label="Total Price" class="text-right">{{remote1chPrice}}</td>
                             </tr>
                             <tr>
-                                <td>Remote (16CH)</td>
-                                <td class="text-center">{{remote16chQty}}</td>
-                                <td class="text-right">{{remote16chPrice}}</td>
+                                <td data-label="Item">Remote (16CH)</td>
+                                <td data-label="QTY" class="text-center">{{remote16chQty}}</td>
+                                <td data-label="Total Price" class="text-right">{{remote16chPrice}}</td>
                             </tr>
                             <tr>
-                                <td>Charger</td>
-                                <td class="text-center">{{chargerQty}}</td>
-                                <td class="text-right">{{chargerPrice}}</td>
+                                <td data-label="Item">Charger</td>
+                                <td data-label="QTY" class="text-center">{{chargerQty}}</td>
+                                <td data-label="Total Price" class="text-right">{{chargerPrice}}</td>
                             </tr>
                             <tr>
-                                <td>3M Cord</td>
-                                <td class="text-center">{{cord3mQty}}</td>
-                                <td class="text-right">{{cord3mPrice}}</td>
+                                <td data-label="Item">3M Cord</td>
+                                <td data-label="QTY" class="text-center">{{cord3mQty}}</td>
+                                <td data-label="Total Price" class="text-right">{{cord3mPrice}}</td>
                             </tr>
                         </tbody>
                         <tfoot>

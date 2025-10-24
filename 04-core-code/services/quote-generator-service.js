@@ -187,7 +187,7 @@ export class QuoteGeneratorService {
     }
 
     _generateItemsTableHtml(items, summaryData) {
-        const headers = ['#', 'F-NAME', 'F-COLOR', 'Location', 'HD', 'DUAL', 'MOTOR', 'PRICE'];
+        const headers = ['#', 'F-NAME', 'F-COLOR', 'Location', 'HD', 'Dual', 'Motor', 'Price'];
         const mulTimes = summaryData.mulTimes || 1;
     
         const rows = items
@@ -210,9 +210,9 @@ export class QuoteGeneratorService {
                     <td data-label="F-COLOR" class="${fabricClass}">${item.color || ''}</td>
                     <td data-label="Location">${item.location || ''}</td>
                     <td data-label="HD" class="text-center">${item.winder === 'HD' ? '✔' : ''}</td>
-                    <td data-label="DUAL" class="text-center">${item.dual === 'D' ? '✔' : ''}</td>
-                    <td data-label="MOTOR" class="text-center">${item.motor ? '✔' : ''}</td>
-                    <td data-label="PRICE" class="text-right">$${finalPrice.toFixed(2)}</td>
+                    <td data-label="Dual" class="text-center">${item.dual === 'D' ? '✔' : ''}</td>
+                    <td data-label="Motor" class="text-center">${item.motor ? '✔' : ''}</td>
+                    <td data-label="Price" class="text-right">$${finalPrice.toFixed(2)}</td>
                 `;
     
                 return `<tr>${cells}</tr>`;
@@ -245,7 +245,7 @@ export class QuoteGeneratorService {
             <tr>
                 <td data-label="NO">1</td>
                 <td data-label="Description">
-                    <div class="description"><strong>Roller Blinds</strong></div>
+                    <div class="description">Roller Blinds</div>
                 </td>
                 <td data-label="QTY" class="align-right">${validItemCount}</td>
                 <td data-label="Price" class="align-right">
@@ -264,7 +264,7 @@ export class QuoteGeneratorService {
                 <tr>
                     <td data-label="NO">${itemNumber++}</td>
                     <td data-label="Description">
-                        <div class="description"><strong>Installation Accessories</strong></div>
+                        <div class="description">Installation Accessories</div>
                     </td>
                     <td data-label="QTY" class="align-right">NA</td>
                     <td data-label="Price" class="align-right">$${(summaryData.acceSum || 0).toFixed(2)}</td>
@@ -278,7 +278,7 @@ export class QuoteGeneratorService {
                 <tr>
                     <td data-label="NO">${itemNumber++}</td>
                     <td data-label="Description">
-                        <div class="description"><strong>Motorised Accessories</strong></div>
+                        <div class="description">Motorised Accessories</div>
                     </td>
                     <td data-label="QTY" class="align-right">NA</td>
                     <td data-label="Price" class="align-right">$${(summaryData.eAcceSum || 0).toFixed(2)}</td>
