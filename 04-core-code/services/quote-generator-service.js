@@ -193,8 +193,6 @@ export class QuoteGeneratorService {
         const rows = items
             .filter(item => item.width && item.height)
             .map((item, index) => {
-                const finalPrice = (item.linePrice || 0) * mulTimes;
-    
                 let fabricClass = '';
                 if (item.fabric && item.fabric.toLowerCase().includes('light-filter')) {
                     fabricClass = 'bg-light-filter';
@@ -204,18 +202,20 @@ export class QuoteGeneratorService {
                     fabricClass = 'bg-blockout';
                 }
     
-                // [MODIFIED] Conditionally build cells to avoid empty rows on mobile
-                const cells = [];
-                cells.push(`<td data-label="#" class="text-center">${index + 1}</td>`);
-                if (item.fabric) cells.push(`<td data-label="F-NAME" class="${fabricClass}">${item.fabric}</td>`);
-                if (item.color) cells.push(`<td data-label="F-COLOR" class="${fabricClass}">${item.color}</td>`);
-                if (item.location) cells.push(`<td data-label="Location">${item.location}</td>`);
-                if (item.winder === 'HD') cells.push(`<td data-label="HD" class="text-center">✔</td>`);
-                if (item.dual === 'D') cells.push(`<td data-label="DUAL" class="text-center">✔</td>`);
-                if (item.motor) cells.push(`<td data-label="MOTOR" class="text-center">✔</td>`);
-                cells.push(`<td data-label="PRICE" class="text-right">$${finalPrice.toFixed(2)}</td>`);
+                // [MODIFIED] Always generate all cells to maintain table structure, leaving them empty if the property doesn't exist.
+                const finalPrice = (item.linePrice || 0) * mulTimes;
+                const cells = `
+                    <td data-label="#" class="text-center">${index + 1}</td>
+                    <td data-label="F-NAME" class="${fabricClass}">${item.fabric || ''}</td>
+                    <td data-label="F-COLOR" class="${fabricClass}">${item.color || ''}</td>
+                    <td data-label="Location">${item.location || ''}</td>
+                    <td data-label="HD" class="text-center">${item.winder === 'HD' ? '✔' : ''}</td>
+                    <td data-label="DUAL" class="text-center">${item.dual === 'D' ? '✔' : ''}</td>
+                    <td data-label="MOTOR" class="text-center">${item.motor ? '✔' : ''}</td>
+                    <td data-label="PRICE" class="text-right">$${finalPrice.toFixed(2)}</td>
+                `;
     
-                return `<tr>${cells.join('')}</tr>`;
+                return `<tr>${cells}</tr>`;
             })
             .join('');
     

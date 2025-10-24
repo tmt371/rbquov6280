@@ -199,10 +199,10 @@
             .table-scroll-wrapper {
                 overflow-x: hidden;
             }
-            .detailed-list-table, .motorised-accessories-table {
+            .detailed-list-table {
                 border: none;
             }
-            .detailed-list-table thead, .motorised-accessories-table thead {
+            .detailed-list-table thead {
                 border: none;
                 clip: rect(0 0 0 0);
                 height: 1px;
@@ -212,7 +212,7 @@
                 position: absolute;
                 width: 1px;
             }
-            .detailed-list-table tr, .motorised-accessories-table tr {
+            .detailed-list-table tr {
                 display: block;
                 margin-bottom: 15px;
                 border: 1px solid var(--border-light-grey);
@@ -220,7 +220,7 @@
                 padding: 0;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             }
-            .detailed-list-table td, .motorised-accessories-table td {
+            .detailed-list-table td {
                 display: flex;
                 justify-content: space-between;
                 padding: 10px 15px;
@@ -228,22 +228,23 @@
                 border-bottom: 1px solid var(--border-light-grey);
                 text-align: right;
             }
-            .detailed-list-table tr td:last-child, .motorised-accessories-table tr td:last-child {
+            .detailed-list-table tr td:last-child {
                 border-bottom: none;
             }
-            .detailed-list-table td:before, .motorised-accessories-table td:before {
+            
+            .detailed-list-table td:before {
                 content: attr(data-label);
                 font-weight: 600;
                 text-align: left;
                 padding-right: 15px;
             }
-            .detailed-list-table td:first-of-type, .motorised-accessories-table td:first-of-type {
+            .detailed-list-table td:first-of-type {
                 background-color: var(--header-bg-color);
                 color: #333;
                 font-weight: bold;
                 border-radius: 4px 4px 0 0;
             }
-            .detailed-list-table td:first-of-type::before, .motorised-accessories-table td:first-of-type::before {
+            .detailed-list-table td:first-of-type::before {
                 color: #333;
             }
         }
@@ -323,7 +324,7 @@
                     <p><strong>D'Bracket:</strong> Double Bracket (for Dual Roller Blinds)</p>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
 
 </body>
