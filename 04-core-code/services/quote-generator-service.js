@@ -189,12 +189,12 @@ export class QuoteGeneratorService {
     _generateItemsTableHtml(items, summaryData) {
         const headers = ['#', 'F-NAME', 'F-COLOR', 'Location', 'HD', 'DUAL', 'MOTOR', 'PRICE'];
         const mulTimes = summaryData.mulTimes || 1;
-
+    
         const rows = items
             .filter(item => item.width && item.height)
             .map((item, index) => {
                 const finalPrice = (item.linePrice || 0) * mulTimes;
-
+    
                 let fabricClass = '';
                 if (item.fabric && item.fabric.toLowerCase().includes('light-filter')) {
                     fabricClass = 'bg-light-filter';
@@ -203,24 +203,24 @@ export class QuoteGeneratorService {
                 } else if (['B1', 'B2', 'B3', 'B4', 'B5'].includes(item.fabricType)) {
                     fabricClass = 'bg-blockout';
                 }
-
-                return `
-                    <tr>
-                        <td class="text-center">${index + 1}</td>
-                        <td class="${fabricClass}">${item.fabric || ''}</td>
-                        <td class="${fabricClass}">${item.color || ''}</td>
-                        <td>${item.location || ''}</td>
-                        <td class="text-center">${item.winder === 'HD' ? '✔' : ''}</td>
-                        <td class="text-center">${item.dual === 'D' ? '✔' : ''}</td>
-                        <td class="text-center">${item.motor ? '✔' : ''}</td>
-                        <td class="text-right">$${finalPrice.toFixed(2)}</td>
-                    </tr>
-                `;
+    
+                // [MODIFIED] Conditionally build cells to avoid empty rows on mobile
+                const cells = [];
+                cells.push(`<td data-label="#" class="text-center">${index + 1}</td>`);
+                if (item.fabric) cells.push(`<td data-label="F-NAME" class="${fabricClass}">${item.fabric}</td>`);
+                if (item.color) cells.push(`<td data-label="F-COLOR" class="${fabricClass}">${item.color}</td>`);
+                if (item.location) cells.push(`<td data-label="Location">${item.location}</td>`);
+                if (item.winder === 'HD') cells.push(`<td data-label="HD" class="text-center">✔</td>`);
+                if (item.dual === 'D') cells.push(`<td data-label="DUAL" class="text-center">✔</td>`);
+                if (item.motor) cells.push(`<td data-label="MOTOR" class="text-center">✔</td>`);
+                cells.push(`<td data-label="PRICE" class="text-right">$${finalPrice.toFixed(2)}</td>`);
+    
+                return `<tr>${cells.join('')}</tr>`;
             })
             .join('');
-
+    
         return `
-            <table class="items-table">
+            <table class="items-table detailed-list-table">
                 <thead>
                     <tr class="table-title">
                         <th colspan="${headers.length}">Roller Blinds - Detailed List</th>
@@ -243,7 +243,7 @@ export class QuoteGeneratorService {
 
         rows.push(`
             <tr>
-                <td data-label="#">1</td>
+                <td data-label="NO">1</td>
                 <td data-label="Description">
                     <div class="description"><strong>Roller Blinds</strong></div>
                 </td>
@@ -262,7 +262,7 @@ export class QuoteGeneratorService {
         if (summaryData.acceSum > 0) {
             rows.push(`
                 <tr>
-                    <td data-label="#">${itemNumber++}</td>
+                    <td data-label="NO">${itemNumber++}</td>
                     <td data-label="Description">
                         <div class="description"><strong>Installation Accessories</strong></div>
                     </td>
@@ -276,7 +276,7 @@ export class QuoteGeneratorService {
         if (summaryData.eAcceSum > 0) {
             rows.push(`
                 <tr>
-                    <td data-label="#">${itemNumber++}</td>
+                    <td data-label="NO">${itemNumber++}</td>
                     <td data-label="Description">
                         <div class="description"><strong>Motorised Accessories</strong></div>
                     </td>
@@ -292,7 +292,7 @@ export class QuoteGeneratorService {
         const deliveryDiscountedPrice = deliveryExcluded ? 0 : (summaryData.deliveryFee || 0);
         rows.push(`
             <tr>
-                <td data-label="#">${itemNumber++}</td>
+                <td data-label="NO">${itemNumber++}</td>
                 <td data-label="Description">
                     <div class="description">Delivery</div>
                 </td>
@@ -307,7 +307,7 @@ export class QuoteGeneratorService {
         const installDiscountedPrice = installExcluded ? 0 : (summaryData.installFee || 0);
         rows.push(`
             <tr>
-                <td data-label="#">${itemNumber++}</td>
+                <td data-label="NO">${itemNumber++}</td>
                 <td data-label="Description">
                     <div class="description">Installation</div>
                 </td>
@@ -322,7 +322,7 @@ export class QuoteGeneratorService {
         const removalDiscountedPrice = removalExcluded ? 0 : (summaryData.removalFee || 0);
         rows.push(`
             <tr>
-                <td data-label="#">${itemNumber++}</td>
+                <td data-label="NO">${itemNumber++}</td>
                 <td data-label="Description">
                     <div class="description">Removal</div>
                 </td>
