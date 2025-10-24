@@ -203,16 +203,23 @@ export class QuoteGeneratorService {
                 }
     
                 const finalPrice = (item.linePrice || 0) * mulTimes;
-                const cells = `
-                    <td data-label="#" class="text-center">${index + 1}</td>
-                    <td data-label="F-NAME" class="${fabricClass}">${item.fabric || ''}</td>
-                    <td data-label="F-COLOR" class="${fabricClass}">${item.color || ''}</td>
-                    <td data-label="Location">${item.location || ''}</td>
-                    <td data-label="HD" class="text-center">${item.winder === 'HD' ? '✔' : ''}</td>
-                    <td data-label="Dual" class="text-center">${item.dual === 'D' ? '✔' : ''}</td>
-                    <td data-label="Motor" class="text-center">${item.motor ? '✔' : ''}</td>
-                    <td data-label="Price" class="text-right">$${finalPrice.toFixed(2)}</td>
-                `;
+
+                const cell = (dataLabel, content, cssClass = '') => {
+                    const isEmpty = !content;
+                    const finalClass = `${cssClass} ${isEmpty ? 'is-empty-cell' : ''}`.trim();
+                    return `<td data-label="${dataLabel}" class="${finalClass}">${content}</td>`;
+                };
+    
+                const cells = [
+                    cell('#', index + 1, 'text-center'),
+                    cell('F-NAME', item.fabric || '', fabricClass),
+                    cell('F-COLOR', item.color || '', fabricClass),
+                    cell('Location', item.location || ''),
+                    cell('HD', item.winder === 'HD' ? '✔' : '', 'text-center'),
+                    cell('Dual', item.dual === 'D' ? '✔' : '', 'text-center'),
+                    cell('Motor', item.motor ? '✔' : '', 'text-center'),
+                    cell('Price', `$${finalPrice.toFixed(2)}`, 'text-right')
+                ].join('');
     
                 return `<tr>${cells}</tr>`;
             })
@@ -223,12 +230,12 @@ export class QuoteGeneratorService {
                 <colgroup>
                     <col style="width: 5%;">
                     <col style="width: 20%;">
-                    <col style="width: auto;">
                     <col style="width: 15%;">
-                    <col style="width: 7%;">
-                    <col style="width: 7%;">
-                    <col style="width: 7%;">
-                    <col style="width: 8%;">
+                    <col style="width: 12%;">
+                    <col style="width: 9%;">
+                    <col style="width: 9%;">
+                    <col style="width: 9%;">
+                    <col style="width: 13%;">
                 </colgroup>
                 <thead>
                     <tr class="table-title">
